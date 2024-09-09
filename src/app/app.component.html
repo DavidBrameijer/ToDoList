@@ -1,0 +1,57 @@
+<div class="container">
+
+  <h1>To-Do List</h1>
+
+  <table class="table">
+    <tbody>
+      @for (t of taskList; track $index) {
+      <tr [class.completed]="t.completed === true">
+        <th scope="row">{{$index + 1}}</th>
+        @if(t.completed){
+        <td>{{t.task}}({{t.duration}} hr)</td>
+        }
+        @else {
+        <td><button (click)="completeTask(t)">Complete</button>{{t.task}}({{t.duration}} hr)</td>
+        }
+        @if(t.priority === "High" || t.priority === "Low"){
+        <td>{{t.priority}} priority</td>
+        }
+        @else{
+        <td></td>
+        }
+        <button (click)="removeTask(t)">X</button>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  <div class="card">
+    <div class="card-body">
+      <p>Create a new task:</p>
+      <input placeholder="Task name..." name="task" type="text" [(ngModel)]="formTask.task" />
+      <br>
+      <p>How many hours do you estimate?</p>
+      <input placeholder="Estimated hours" name="duration" type="text" [(ngModel)]="formTask.duration" />
+    </div>
+    <div class="row form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+      <label class="form-check-label" for="flexRadioDefault1" >
+        Low
+      </label>
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+      <label class="form-check-label" for="flexRadioDefault1">
+        Normal
+      </label>
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+      <label class="form-check-label" for="flexRadioDefault1">
+        High
+      </label>
+    </div>
+    <div class="card-footer">
+      <button (click)="addTask()">Add</button>
+    </div>
+
+  </div>
+
+
+</div>
